@@ -1,0 +1,70 @@
+@BTH4_SOA_HostAddress = https://localhost:7262
+@JwtToken = YOUR_JWT_TOKEN_FROM_TH2_HERE
+
+### 1. Lấy danh sách tất cả đơn hàng
+GET {{BTH4_SOA_HostAddress}}/orders
+Accept: application/json
+Authorization: Bearer {{JwtToken}}
+
+### 2. Tạo đơn hàng mới (Kèm sản phẩm và số lượng)
+POST {{BTH4_SOA_HostAddress}}/orders
+Content-Type: application/json
+Authorization: Bearer {{JwtToken}}
+
+{
+  "customerName": "Nguyen Van A",
+  "customerEmail": "nguyenvana@example.com",
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 2
+    }
+  ]
+}
+
+### 3. Lấy chi tiết đơn hàng theo ID
+GET {{BTH4_SOA_HostAddress}}/orders/1
+Accept: application/json
+Authorization: Bearer {{JwtToken}}
+
+### 4. Cập nhật trạng thái đơn hàng (pending, completed, cancelled)
+PUT {{BTH4_SOA_HostAddress}}/orders/1
+Content-Type: application/json
+Authorization: Bearer {{JwtToken}}
+
+{
+  "status": "completed"
+}
+
+### 5. Xóa đơn hàng theo ID
+DELETE {{BTH4_SOA_HostAddress}}/orders/1
+Authorization: Bearer {{JwtToken}}
+
+### 6. Lấy danh sách tất cả order items
+GET {{BTH4_SOA_HostAddress}}/order_items
+Accept: application/json
+Authorization: Bearer {{JwtToken}}
+
+### 7. Thêm một item vào đơn hàng có sẵn
+POST {{BTH4_SOA_HostAddress}}/order_items
+Content-Type: application/json
+Authorization: Bearer {{JwtToken}}
+
+{
+  "orderId": 1,
+  "productId": 1,
+  "quantity": 1
+}
+
+### 8. Cập nhật số lượng của order item
+PUT {{BTH4_SOA_HostAddress}}/order_items/1
+Content-Type: application/json
+Authorization: Bearer {{JwtToken}}
+
+{
+  "quantity": 3
+}
+
+### 9. Xóa order item theo ID
+DELETE {{BTH4_SOA_HostAddress}}/order_items/1
+Authorization: Bearer {{JwtToken}}
